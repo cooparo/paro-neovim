@@ -39,7 +39,7 @@ let
     typstyle
 
     # PDF
-    poppler_utils
+    poppler-utils
   ];
 
   plugins = with pkgs.vimPlugins; [
@@ -166,13 +166,11 @@ in
 pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped (
   neovimConfig
   // {
-    wrapperArgs =
-      neovimConfig.wrapperArgs
-      ++ [
-        "--prefix"
-        "PATH"
-        ":"
-        (pkgs.lib.makeBinPath extraPackages)
-      ];
+    wrapperArgs = neovimConfig.wrapperArgs ++ [
+      "--prefix"
+      "PATH"
+      ":"
+      (pkgs.lib.makeBinPath extraPackages)
+    ];
   }
 )
