@@ -21,8 +21,9 @@ jobs:
           name: paro-neovim
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
 
-      - run: nix build .#default
-      - run: nix build .#nord
-      - run: nix build .#everforest
-      - run: nix build .#catppuccin
-      - run: nix build .#gruvbox
+      - run: |
+          nix build .#default --print-out-paths | cachix push paro-neovim
+          nix build .#nord --print-out-paths | cachix push paro-neovim
+          nix build .#everforest --print-out-paths | cachix push paro-neovim
+          nix build .#catppuccin --print-out-paths | cachix push paro-neovim
+          nix build .#gruvbox --print-out-paths | cachix push paro-neovim
