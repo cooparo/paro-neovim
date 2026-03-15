@@ -51,7 +51,7 @@ Or manually in `~/.config/nix/nix.conf`:
 
 ```
 extra-substituters = https://paro-neovim.cachix.org
-extra-trusted-public-keys = paro-neovim.cachix.org-1:<public-key>
+extra-trusted-public-keys = paro-neovim.cachix.org-1:2WUkDjYe2rNGRcfUnNW4C5UZ2IiIQ08WtyOuwweAPBk=
 ```
 
 ## Supported platforms
