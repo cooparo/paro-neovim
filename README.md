@@ -39,6 +39,21 @@ Themes are resolved at build time via [nix-colors](https://github.com/misterio77
 
 **Other:** ripgrep, fd, tree-sitter, nodejs
 
+## Binary cache
+
+Pre-built binaries are available via [Cachix](https://app.cachix.org/cache/paro-neovim). Add the cache to avoid building from source:
+
+```bash
+cachix use paro-neovim
+```
+
+Or manually in `~/.config/nix/nix.conf`:
+
+```
+extra-substituters = https://paro-neovim.cachix.org
+extra-trusted-public-keys = paro-neovim.cachix.org-1:<public-key>
+```
+
 ## Supported platforms
 
 `x86_64-linux` · `aarch64-linux` · `x86_64-darwin` · `aarch64-darwin`

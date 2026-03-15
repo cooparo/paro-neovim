@@ -47,6 +47,7 @@ vim.opt.fillchars = {
 vim.opt.winborder = 'rounded'
 
 -- File handling
+vim.opt.autoread = true
 vim.opt.backup = false
 vim.opt.writebackup = false
 vim.opt.swapfile = false

@@ -29,6 +29,37 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- Auto-reload buffers when files change on disk
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+  group = vim.api.nvim_create_augroup("auto_reload", { clear = true }),
+  callback = function()
+    if vim.fn.getcmdwintype() == "" then
+      vim.cmd("checktime")
+    end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+  group = vim.api.nvim_create_augroup("auto_reload_msg", { clear = true }),
+  callback = function()
+    vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)
+  end,
+})
+
+-- Open PDF files as text using pdftotext
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = vim.api.nvim_create_augroup("pdf_view", { clear = true }),
+  pattern = "*.pdf",
+  callback = function()
+    local filename = vim.fn.shellescape(vim.api.nvim_buf_get_name(0))
+    vim.bo.readonly = false
+    vim.cmd("silent %!pdftotext -layout " .. filename .. " -")
+    vim.bo.filetype = "text"
+    vim.bo.readonly = true
+    vim.bo.modifiable = false
+  end,
+})
+
 -- Set line wrapping only for typst and markdown files
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "typst", "markdown" },

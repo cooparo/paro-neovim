@@ -36,19 +36,24 @@ This is a Nix flake that packages a standalone Neovim configuration. There is no
 
 ### Lua structure
 
-All Lua lives under `lua/` and is inlined into one big `init.lua` at build time — there is no runtime `require()` module system for this config's own files.
+All Lua lives under `lua/` and is inlined into one big `init.lua` at build time — there is no runtime `require()` module system for this config's own files. Because files are concatenated, **order in `initLua` matters**: colorscheme must be first, options/remaps before plugins, plugins before LSPs. Variables and functions defined in one file are visible to all subsequent files.
 
-- `lua/options.lua` — Vim options (leader = `<Space>`)
+- `lua/options.lua` — Vim options (leader = `<Space>`, 2-space indent, spaces not tabs)
 - `lua/remap.lua` — Core keymaps
 - `lua/autocmd.lua` — Autocommands
 - `lua/diagnostic.lua` — LSP diagnostic display settings
 - `lua/filetype.lua` — Filetype overrides
-- `lua/plugins/` — One file per plugin's `setup()` call and related keymaps
+- `lua/plugins/` — One file per plugin's `setup()` call and keymaps
 - `lua/lsp/` — One file per LSP server config (`vim.lsp.config` + `vim.lsp.enable`)
+
+Simple plugins that only need a one-liner `require("x").setup {}` are configured inline in `package.nix`'s `initLua` instead of getting a separate file (e.g., fidget, mini.cursorword, satellite, todo-comments, nvim-autopairs).
 
 ### Theme system
 
-Themes are resolved at **build time** via `nix-colors`. The `base16-nvim` plugin receives hex colors baked directly into `init.lua` — you cannot switch themes at runtime. To add a new theme, add a new attribute in `flake.nix`'s `packages` output pointing to `package.nix` with a `theme` value matching a `nix-colors` scheme name, then add the corresponding entry in `package.nix`.
+Themes are resolved at **build time** via `nix-colors`. The `base16-nvim` plugin receives hex colors baked directly into `init.lua` — you cannot switch themes at runtime. To add a new theme:
+
+1. Add a new attribute in `flake.nix`'s `packages` output with a `theme` value matching a `nix-colors` scheme name
+2. Note that the flake attribute name can differ from the scheme name (e.g., `gruvbox` attribute uses `theme = "gruvbox-dark-medium"`)
 
 ### Adding a plugin
 

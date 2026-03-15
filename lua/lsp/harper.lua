@@ -6,3 +6,9 @@ vim.lsp.config["harper_ls"] = {
 }
 
 vim.lsp.enable({ "harper_ls" })
+
+-- Curvy yellowish underlines for harper diagnostics
+vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", {
+  undercurl = true,
+  sp = HARPER_UNDERLINE_COLOR,
+})

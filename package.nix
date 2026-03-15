@@ -37,6 +37,9 @@ let
     # Typst
     tinymist
     typstyle
+
+    # PDF
+    poppler_utils
   ];
 
   plugins = with pkgs.vimPlugins; [
@@ -144,6 +147,7 @@ let
       ${builtins.readFile ./lua/lsp/rust-analyzer.lua}
       ${builtins.readFile ./lua/lsp/tinymist.lua}
       ${builtins.readFile ./lua/lsp/gopls.lua}
+      HARPER_UNDERLINE_COLOR = '#${base0A}'
       ${builtins.readFile ./lua/lsp/harper.lua}
       ${builtins.readFile ./lua/lsp/bashls.lua}
       ${builtins.readFile ./lua/lsp/clangd.lua}
