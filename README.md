@@ -28,7 +28,7 @@ Themes are resolved at build time via [nix-colors](https://github.com/misterio77
 | `default`   | nord                |
 | `nord`      | nord                |
 | `everforest`| everforest          |
-| `catppuccin`| catppuccin          |
+| `catppuccin`| catppuccin-mocha    |
 | `gruvbox`   | gruvbox-dark-medium |
 
 ## Included tools

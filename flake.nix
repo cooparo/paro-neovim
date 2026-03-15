@@ -37,7 +37,7 @@
           };
           catppuccin = pkgs.callPackage ./package.nix {
             inherit nix-colors;
-            theme = "catppuccin";
+            theme = "catppuccin-mocha";
           };
           gruvbox = pkgs.callPackage ./package.nix {
             inherit nix-colors;
