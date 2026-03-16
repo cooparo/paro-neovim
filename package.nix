@@ -40,6 +40,7 @@ let
 
     # PDF
     poppler-utils
+    zathura
   ];
 
   plugins = with pkgs.vimPlugins; [
