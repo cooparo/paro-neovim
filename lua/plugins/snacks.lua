@@ -96,6 +96,20 @@ vim.keymap.set("n", "<leader>bo", function() Snacks.bufdelete.other() end, { des
 
 -- Explorer
 vim.keymap.set("n", "<leader>e", function() Snacks.explorer() end, { desc = "file [e]xplorer" })
+vim.keymap.set("n", "<leader>o", function()
+  if vim.bo.filetype == "snacks_picker_list" then
+    vim.cmd("wincmd p")
+  else
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+      local ft = vim.api.nvim_get_option_value("filetype", { buf = vim.api.nvim_win_get_buf(win) })
+      if ft == "snacks_picker_list" then
+        vim.api.nvim_set_current_win(win)
+        return
+      end
+    end
+    Snacks.explorer()
+  end
+end, { desc = "Toggle focus: file tree / buffer" })
 
 -- Picker
 vim.keymap.set("n", "<leader><leader>", function() Snacks.picker.files() end, { desc = "file picker" })
