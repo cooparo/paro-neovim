@@ -42,6 +42,7 @@ require('snacks').setup {
     },
     sources = {
       explorer = {
+        ignored = true,
         layout = {
           auto_hide = { "input" },
         },
