@@ -39,7 +39,6 @@ let
     typstyle
 
     # PDF
-    poppler-utils
     zathura
   ];
 
