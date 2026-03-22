@@ -131,7 +131,7 @@ let
       require("fidget").setup {}
       ${builtins.readFile ./lua/plugins/snacks.lua}
       require('mini.cursorword').setup {}
-      require("satellite").setup {}
+      ${builtins.readFile ./lua/plugins/satellite.lua}
       ${builtins.readFile ./lua/plugins/incline.lua}
       ${builtins.readFile ./lua/plugins/blink.lua}
       ${builtins.readFile ./lua/plugins/luasnip.lua}
