@@ -15,9 +15,11 @@ vim.diagnostic.config({
 })
 
 -- Show on current line the diagnostic window
+local diag_float_enabled = true
 vim.api.nvim_create_autocmd({ "CursorHold" }, {
   group = vim.api.nvim_create_augroup("float_diagnostic", { clear = true }),
   callback = function()
+    if not diag_float_enabled then return end
     vim.diagnostic.open_float(nil, {
       focusable = false, -- Keep focus on the editor, not the window
       close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
@@ -26,3 +28,8 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
     })
   end
 })
+
+vim.keymap.set("n", "<leader>td", function()
+  diag_float_enabled = not diag_float_enabled
+  vim.notify("Diagnostic float " .. (diag_float_enabled and "enabled" or "disabled"))
+end, { desc = "[t]oggle [d]iagnostic float" })
