@@ -41,6 +41,9 @@ require('snacks').setup {
       }
     },
     sources = {
+      files = {
+        exclude = { "*.pdf" },
+      },
       explorer = {
         ignored = true,
         layout = {
