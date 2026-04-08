@@ -155,22 +155,17 @@ let
       ${nixdConfig}
     '';
 
-  neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
-    plugins = map (p: {
-      plugin = p;
-      optional = false;
-    }) plugins;
-    customRC = "lua << EOF\n${initLua}\nEOF";
-  };
 in
-pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped (
-  neovimConfig
-  // {
-    wrapperArgs = neovimConfig.wrapperArgs ++ [
-      "--prefix"
-      "PATH"
-      ":"
-      (pkgs.lib.makeBinPath extraPackages)
-    ];
-  }
-)
+pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped {
+  plugins = map (p: {
+    plugin = p;
+    optional = false;
+  }) plugins;
+  luaRcContent = initLua;
+  wrapperArgs = [
+    "--prefix"
+    "PATH"
+    ":"
+    (pkgs.lib.makeBinPath extraPackages)
+  ];
+}
