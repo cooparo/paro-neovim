@@ -119,7 +119,7 @@ end, { desc = "Toggle focus: file tree / buffer" })
 vim.keymap.set("n", "<leader><leader>", function() Snacks.picker.files() end, { desc = "file picker" })
 vim.keymap.set("n", "<leader>fg", function() Snacks.picker.grep({ hidden = true, filter = { cwd = true } }) end,
   { desc = "[g]rep" })
-vim.keymap.set("n", "<leader>ft", function() Snacks.picker.todo_comments() end, { desc = "t]odo comments" })
+vim.keymap.set("n", "<leader>ft", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, { desc = "[t]odo comments" })
 vim.keymap.set("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "picker [h]elp" })
 vim.keymap.set('n', '<leader>fb', function() Snacks.picker.buffers() end, { desc = '[b]uffers' })
 vim.keymap.set("n", "<leader>n", function() Snacks.picker.notifications() end, { desc = "[n]otification" })
