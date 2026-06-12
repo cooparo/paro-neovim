@@ -43,6 +43,10 @@
             inherit nix-colors;
             theme = "gruvbox-dark-medium";
           };
+          rose-pine = pkgs.callPackage ./package.nix {
+            inherit nix-colors;
+            theme = "rose-pine";
+          };
         }
       );
 
